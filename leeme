@@ -1,0 +1,30 @@
+Enrutamientos, la guia de como no quedar como un subnormal a la hora de enrutar: Request for comments edition
+#hago esto con todo el cariño del mundo, esta parte es opcional a leer ya que lo importante es como te manejas con los comandos,
+
+Los enrutamientos funcionan igual que las señales de trafico de "direccion obligatoria" o como un guardia civil, dirige el trafico a una direccion exacta, pero ¿como funciona exactamente el enrutamiento?
+
+En general, digamos que los routers tienen direcciones que conocen y direcciones que no conocen, el enrutamiento lo que hace es enviar un paquete por un camino en caso de que la red de destino no este CONECTADA DIRECTAMENTE.
+
+Mas o menos este seria el proceso:
+
+Envio del paquete->Router compara el apartado IP de la trama -> control de flujo
+
+que hace el control de flujo:
+¿Esta la red CONECTADA DIRECTAMENTE al router?
+-Si: Reenvio del paquete a esa red
+-No: El paquete es reenviado a una red conocida por el protocolo o por el enrutamiento estatico, segun su distancia administrativa.
+
+(la distancia administrativa es el "gasto" que ocurre si se manda el paquete por una ruta en concreto, la de menor coste suele ser los conectados directamente, se puede alterar manualmente, pero eso ya lo comentare)
+
+Envio del paquete-> compara el apartadado IP de la trama -> control de flujo
+
+Y asi sucesivamente hasta que acaba su TTL, en ese caso el paquete se descarta
+
+ahora bien, existen varios tipos de enrutamientos
+1. El tradicional "mis cojones mandan aqui" enrutamiento estatico: Se suelen usar en topologias simples, tu las usas en tu router del mercadona que te dan con la linea, lo que pasa es que no tienes ni idea.
+2. El dinamico: Estos se dividen en segun su herencia (si vienen de HDLC o los derivados de este) o segun su metodo de trabajo, a mi personalmente me gusta diferenciarlo por metodo de trabajo
+    -Vector Distancia: RIP, RIPv2, RIPng, IGRP, EIGRP, EGP
+    -Estado-enlace: OSPF, OSPFv2, OSPFv3, IS-IS
+Pero ayy lmao hay un monton mas, aqui solo veo OSPFv2, OSPFv3, RIPv2, RIPng... El resto lo buscais en la wikipedia.
+
+3. Los de cisco: ni idea, personalmente, me salte las clases cuando explicaban eso, pero se supone que combinan todo lo bueno de estado enlace con vector distancia
