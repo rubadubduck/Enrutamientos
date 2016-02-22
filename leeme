@@ -1,0 +1,56 @@
+#Chapter 1. Enrutamiento estatico
+#hago esto con todo el cariño del mundo, esta parte es opcional a leer ya que lo importante es como te manejas con los comandos, 
+lo importante lo remarcare con "[]".
+
+El enrutamiento estatico es la segunda ruta con menor distancia administrativa, se utiliza normalmente en redes pequeñas
+ya que en las empresas grandes el escalamiento de redes hace que sea dificil redirigir manualmente los paquetes
+(En Español: cuantos mas redes, mas rutas y si tienes los huevos de enrutar 100 rutas dicen
+que te dan el nobel al esfuerzo)
+
+Los enrutamientos estaticos se pueden escribir de dos maneras distintas, con interfaces o con saltos
+(la direccion de la siguiente interfaz en el router vecino)
+
+Yo recomiendo:
+En redes vecinas, Interfaces
+En redes externas, saltos
+
+el metodo "Comodista": usar siempre saltos.
+
+el metodo "Berengario el tractorista": Usar siempre interfaces (es un apaño tontorron, porque
+como te quiten la interfaz, adios enrutamiento).
+
+Abreviaciones:
+
+los enrutamientos estaticos se pueden abreviar para poder ahorrar espacio en la tabla de enrutamiento y es
+lo que usan los router comerciales SOHO ("stub").
+
+se basan en abreviar la IP o la mascara a "lo comun" de todas los equipos de la red local, por ejemplo
+
+Si yo tengo un equipo mandando solicitudes HTTP (192.168.50.2)
+y otro usando FTP (192.168.50.4)
+y otro esta usando telnet para configurar un servidor (192.168.50.8)
+y todos salen por el mismo sitio (192.168.50.1)
+
+a la hora de buscar coincidencias se podria sumarizar y encontrar la red en que coinciden
+"ip route 192.168.50.0 255.255.255.0 80.0.0.2"
+o tirar por simplificar todo al minimo comun 0.0.0.0 (predeterminada)
+"ip route 0.0.0.0 0.0.0.0 80.0.0.2"
+
+en caso de que falle:
+1. Topologia de mierda
+2. IPs y mascaras en los routers afectados mal configurados
+3. 6. Una configuracion antigua del router sobrepasa a la nueva configuracion
+4. Estas haciendo mal ctrl+c ctrl+v a los apuntes de CCNA de Cisco
+
+HERRAMIENTAS (en enable):
+show ip route: te muestra las rutas y el tipo de ruta, C es conectado directamente y S estatico
+show ip interface brief: muestra la configuracion de las interfaces (de manera resumida)
+show running-config: muestra toda la configuracion del router para depuracion
+
+HERRAMIENTAS (en cfg terminal):
+no: es como el fairy, lo limpia todo, ponlo delante de los comandos que consideres que hay que borrar y lo borra
+
+Ejemplos:
+"no ip route 192.168.50.0 255.255.255.0 80.0.0.2"
+
+En los archivos siguientes pondre lineas para configurar el enrutamiento estatico
